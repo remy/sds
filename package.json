@@ -1,0 +1,20 @@
+{
+  "name": "next-marbles-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node http.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remy/next-marbles-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remy/next-marbles-server/issues"
+  },
+  "homepage": "https://github.com/remy/next-marbles-server#readme"
+}
