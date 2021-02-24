@@ -1,7 +1,6 @@
 {
   "name": "next-marbles-server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node http.js"
@@ -16,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/remy/next-marbles-server/issues"
   },
-  "homepage": "https://github.com/remy/next-marbles-server#readme"
+  "homepage": "https://github.com/remy/next-marbles-server#readme",
+  "description": ""
 }
