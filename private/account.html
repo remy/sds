@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Simple Service</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+
+  <body>
+    <h1>Manage data</h1>
+
+    <main id="app">
+      <div class="fade-in" v-if="!loaded">Loading…</div>
+      <div v-cloak v-else>
+        <header>
+          <h2 v-show="loaded">User id: {{ user.id }}</h2>
+          <div class="view-as">
+            Display data as:
+            <div>
+              <label><input v-model.number="viewAs" type="radio" value="0" name="view-as"> text</label>
+              <label><input v-model.number="viewAs" type="radio" value="1" name="view-as"> hex</label>
+            </div>
+          </div>
+        </header>
+        <div class="current-payload">
+          <h3>Current GET response</h3>
+          <details>
+            <summary>Length: {{ user.data.length }} bytes</summary>
+            <pre class="hex"><code class="no-break">{{ user.data | asBytes(viewAs) }}</code></pre>
+          </details>
+          <div class="controls">
+            <button class="file">
+              <input v-on:change="upload" type="file">
+              Upload new</button>
+            <button v-on:click="download(user.data)">Download</button>
+          </div>
+        </div>
+        <div>
+          <h3>Latest POSTs ({{ user.submissions.length }})</h3>
+          <details v-for="s in user.submissions">
+            <summary>
+              <span>{{ s.createdAt | format }} - {{ s.data.length }} bytes</span>
+              <span class="controls">
+                <button v-on:click="download(s.data)">Download</button>
+                <button v-on:click="remove(s.id)">Delete</button>
+              </span>
+            </summary>
+            <pre class="hex"><code>{{ s.data | asBytes(viewAs) }}</code></pre>
+            <button v-on:click="download(s)">Download</button>
+            <button v-on:click="remove(s.id)">Delete</button>
+          </details>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>Built by <a href="https://remysharp.com">Remy Sharp</a>
+      </p>
+    </footer>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="/account.js"></script>
+  </body>
+
+</html>

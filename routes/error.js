@@ -59,9 +59,10 @@ module.exports = (error, req, res, next) => {
     );
   }
 
-  // if (error.stack) { // if this is a real error (not expected), then log stack
-  //   console.log(error.stack);
-  // }
+  if (error.stack) {
+    // if this is a real error (not expected), then log stack
+    console.log(error.stack);
+  }
 
   res.status(status).end(msg);
 };

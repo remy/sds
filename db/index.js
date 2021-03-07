@@ -74,4 +74,4 @@ sequelize
     console.log('db sync fail:' + e.message);
   });
 
-module.exports = { User, Submission };
+module.exports = { User, Submission, sequelize };

@@ -25,13 +25,10 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  req.pipe(
-    concat(async (data) => {
-      const S = await Submission.create({
-        data,
-      });
-      await res.locals.user.addSubmission(S);
-      res.end('OK');
-    })
-  );
+  const data = res.locals.raw;
+  const S = await Submission.create({
+    data,
+  });
+  await res.locals.user.addSubmission(S);
+  res.end('OK');
 });

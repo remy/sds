@@ -10,9 +10,18 @@ html {
   html {
     --c-bg: #222;
     --c-fg: #efefef;
-    --c-bg-alt: #000;
+    --c-bg-alt: #171717;
     --c-cta: hotpink;
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -24,6 +33,12 @@ body {
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   background: var(--c-bg);
   color: var(--c-fg);
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
 }
 
 input,
@@ -37,11 +52,17 @@ textarea {
 
 input[type='submit'],
 button {
-  background: var(--c-cta);
-  border: 0;
+  cursor: pointer;
+  background: var(--c-fg);
   padding: 4px 8px;
-  border-radius: 2px;
+  border-radius: 4px;
   color: var(--c-bg);
+  border: 1px solid var(--c-bg);
+}
+
+input[type='submit']:hover,
+button:hover {
+  border: 1px solid var(--c-fg);
 }
 
 input[type]:not([type='submit']) {
@@ -62,11 +83,9 @@ a {
   color: var(--c-cta);
 }
 
-code {
-}
-
 summary {
   cursor: pointer;
+  user-select: none;
 }
 
 summary h3 {
@@ -75,6 +94,7 @@ summary h3 {
 
 details {
   padding: 16px;
+  border-radius: 2px;
   background: var(--c-bg-alt);
 }
 
@@ -90,4 +110,120 @@ details + details {
   pre {
     overflow: scroll;
   }
+}
+
+.hex {
+  font-size: 12px;
+  width: 54ch;
+  white-space: pre-wrap;
+  line-height: 18px;
+  letter-spacing: 1px;
+}
+
+summary {
+  /* display: block; */
+}
+
+summary > span {
+  width: 100%;
+}
+
+details[open] summary button {
+  display: none;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/*--keyframe pointer --*/
+.fade-in {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+}
+
+#app header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.view-as {
+  text-align: right;
+}
+
+.view-as div label {
+  display: block;
+}
+
+label {
+  cursor: pointer;
+}
+
+.current-payload .controls {
+  padding: 16px 0;
+}
+
+.current-payload .controls button {
+  margin-right: 16px;
+}
+
+button.file {
+  display: inline-flex;
+  position: relative;
+  cursor: pointer !important;
+  justify-content: center;
+  overflow: hidden;
+}
+
+button.file input {
+  z-index: 10;
+  width: 100%;
+  cursor: pointer !important;
+  opacity: 0;
+  display: block;
+  position: absolute;
+  margin: 0 !important;
+  padding-left: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+code {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
