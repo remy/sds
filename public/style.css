@@ -2,6 +2,7 @@ html {
   --c-fg: #111;
   --c-bg: #fefefe;
   --c-bg-alt: #eee;
+  --c-border: #999;
   --c-cta: blue;
 }
 
@@ -15,14 +16,42 @@ html {
 }
 
 body {
-  font-size: 16px;
   max-width: 640px;
   padding: 20px;
   margin: 0 auto;
+  font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   background: var(--c-bg);
   color: var(--c-fg);
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  padding: 4px;
+}
+
+input[type='submit'],
+button {
+  background: var(--c-cta);
+  border: 0;
+  padding: 4px 8px;
+  border-radius: 2px;
+  color: var(--c-bg);
+}
+
+input[type]:not([type='submit']) {
+  border: 1px solid var(--c-border);
+  border-radius: 2px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 12px;
 }
 
 p {
