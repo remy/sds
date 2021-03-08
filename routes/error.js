@@ -1,11 +1,12 @@
 const codes = require('http-status-codes');
 const undefsafe = require('undefsafe');
 
+// eslint-disable-next-line no-unused-vars
 module.exports = (error, req, res, next) => {
-  // jshint ignore:line
   let message = null;
   let n;
-  const { NODE_ENV } = process.env;
+
+  console.log({ error, type: typeof error });
 
   if (typeof error === 'number') {
     n = error;
@@ -22,12 +23,6 @@ module.exports = (error, req, res, next) => {
     status = 500;
   }
 
-  // prepare the error page shown to the user
-  const e = {
-    message,
-    status,
-  };
-
   if (status === 401) {
     if (res.locals.apikey) {
       return res.status(401).json({
@@ -36,15 +31,12 @@ module.exports = (error, req, res, next) => {
       });
     }
 
-    return res.status(401).set('location', '/_/login').render('redirect', {
-      layout: false,
-      host: process.env.HOST,
-    });
+    return res.status(401).redirect('/login');
   }
 
   let msg = `${status} ${req.url} `;
   if (req.user) {
-    msg += `${req.user.username} `;
+    msg += `(user:${req.user.id}) `;
   }
   msg += message;
 
@@ -61,7 +53,7 @@ module.exports = (error, req, res, next) => {
 
   if (error.stack) {
     // if this is a real error (not expected), then log stack
-    console.log(error.stack);
+    // console.log(error.stack.split('\n').shift());
   }
 
   res.status(status).end(msg);

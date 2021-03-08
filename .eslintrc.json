@@ -1,0 +1,29 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:jsdoc/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["jsdoc"],
+  "rules": {
+    "no-console": 0,
+    "jsdoc/require-param-description": 0,
+    "jsdoc/require-returns-description": 0,
+    "jsdoc/require-property-description": 0,
+    "jsdoc/valid-types": 0,
+    "no-restricted-globals": [
+      "error",
+      {
+        "name": "name",
+        "message": "Use local parameter instead."
+      }
+    ]
+  }
+}

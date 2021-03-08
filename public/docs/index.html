@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Data Service</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+
+  <body id="docs">
+    <h1>Documentation</h1>
+
+    <main id="app">
+      <div>
+        <details>
+          <summary>What is this service?</summary>
+          <section>
+            <p>This web site provides a URL that devices can make HTTP GET and POST requests to. When a POST request is
+              made, your "app" captures this, and when a GET is made, your app responds with your preconfigured data.
+            </p>
+            <p>For example, if I want to allow players to submit their high scores for my own moderation and I want to
+              provide a high scores table, I my app can receive the high scores I can manually moderate those scores and
+              manually update the overall high scores table.</p>
+            <p>An extended feature is to use the "hooks" to dynamically update your GET response (which you can read
+              about later).</p>
+          </section>
+        </details>
+
+        <details open>
+          <summary>Is this free / how much do I need to pay?</summary>
+          <section>
+            <p>Remy Sharp wrote this app because it I needed something for my own software and it didn't take much to
+              enhance it into multi-user.</p>
+
+            <p>The service is currently free, and will remain so, whilst it is able to run on a single server with
+              little to
+              zero maintenance.</p>
+          </section>
+        </details>
+      </div>
+    </main>
+    <footer>
+      <p>Built by <a href="https://remysharp.com">Remy Sharp</a>
+      <p><a href="/docs">Documentation</a></p>
+    </footer>
+  </body>
+
+</html>

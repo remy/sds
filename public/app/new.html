@@ -10,23 +10,24 @@
   </head>
 
   <body>
-    <h1>Simple Data Service</h1>
-    <h2>A data send and receive service for Spectrum Next developers</h2>
+    <h1>Create new app</h1>
 
-    <main>
-      <form action="/login" method="POST">
+    <main id="app">
+      <form action="/app" method="post">
         <fieldset>
           <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="memorable name">
           </div>
+
           <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password">
+            <label for="name">Webhook:</label>
+            <input type="url" name="hook" id="hook">
+            <span>(optional)</span>
           </div>
         </fieldset>
         <div>
-          <input type="submit" value="Sign in">
+          <input type="submit" value="Create">
         </div>
       </form>
     </main>

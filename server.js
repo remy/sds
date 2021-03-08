@@ -15,7 +15,7 @@ app.set('etag', false);
 app.use(
   bodyParser.urlencoded({
     extended: true,
-    verify(req, res, buf, encoding) {
+    verify(req, res, buf) {
       res.locals.raw = buf;
       return true;
     },

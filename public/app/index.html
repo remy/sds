@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Simple Service</title>
+    <title>Simple Data Service</title>
     <link rel="stylesheet" href="/style.css">
   </head>
 
   <body>
-    <h1>Manage data</h1>
+    <h1>Manage App</h1>
 
     <main id="app">
       <div class="fade-in" v-if="!loaded">Loading…</div>
-      <div v-cloak v-else>
+      <div v-cloak v-if="loaded">
         <header>
-          <h2 v-show="loaded">User id: {{ user.id }}</h2>
+          <h2 v-show="loaded">{{ app.name}} (id: {{ app.id }})</h2>
           <div class="view-as">
             Display data as:
             <div>
@@ -25,22 +25,23 @@
             </div>
           </div>
         </header>
+        <p v-show="app.hook">Webhook: <code>{{ app.hook }}</code></p>
         <div class="current-payload">
           <h3>Current GET response</h3>
           <details>
-            <summary>Length: {{ user.data.length }} bytes</summary>
-            <pre class="hex"><code class="no-break">{{ user.data | asBytes(viewAs) }}</code></pre>
+            <summary>Length: {{ app.data.length }} bytes</summary>
+            <pre class="hex"><code class="no-break">{{ app.data | asBytes(viewAs) }}</code></pre>
           </details>
           <div class="controls">
             <button class="file">
               <input v-on:change="upload" type="file">
               Upload new</button>
-            <button v-on:click="download(user.data)">Download</button>
+            <button v-on:click="download(app.data)">Download</button>
           </div>
         </div>
         <div>
-          <h3>Latest POSTs ({{ user.submissions.length }})</h3>
-          <details v-for="s in user.submissions">
+          <h3>Latest POSTs ({{ app.submissions.length }})</h3>
+          <details v-for="s in app.submissions">
             <summary>
               <span>{{ s.createdAt | format }} - {{ s.data.length }} bytes</span>
               <span class="controls">
@@ -57,11 +58,12 @@
     </main>
     <footer>
       <p>Built by <a href="https://remysharp.com">Remy Sharp</a>
-      </p>
+      <p><a href="/docs">Documentation</a></p>
     </footer>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="/account.js"></script>
+    <script src="/app.js"></script>
   </body>
 
 </html>

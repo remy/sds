@@ -31,15 +31,20 @@ const save = (function () {
 new Vue({
   el: '#app',
   data: {
-    apps: null,
+    app: null,
     user: null,
   },
   computed: {
     loaded() {
-      return !!this.user;
+      return !!this.app;
     },
-    viewAs() {
-      return this.user ? this.user.viewAs : TEXT;
+    viewAs: {
+      get() {
+        return this.user ? this.user.viewAs : TEXT;
+      },
+      set(value) {
+        if (this.user) this.user.viewAs = value;
+      },
     },
   },
   filters: {
@@ -72,19 +77,19 @@ new Vue({
       const formData = new FormData();
       formData.append('file', event.target.files[0]);
 
-      await fetch('/account', {
+      await fetch(`/api/app/${this.app.id}`, {
         method: 'POST',
         body: formData,
       });
       this.update();
     },
     update() {
-      fetch('/api/me', {
+      fetch('/api' + location.pathname, {
         credentials: 'same-origin',
       })
         .then((res) => res.json())
         .then((res) => {
-          this.apps = res.apps;
+          this.app = res.app;
           this.user = res.user;
         })
         .catch((e) => console.log(e));
@@ -97,14 +102,14 @@ new Vue({
         return;
       }
 
-      const res = await fetch('/api/submission/' + id, {
+      const res = await fetch(`/api/app/${this.app.id}/submission/${id}`, {
         method: 'DELETE',
       });
       if (res.status !== 200) {
         alert('Something went wrong');
         return;
       }
-      this.user.submissions = this.user.submissions.filter((_) => _.id !== id);
+      this.app.submissions = this.app.submissions.filter((_) => _.id !== id);
     },
   },
   mounted() {

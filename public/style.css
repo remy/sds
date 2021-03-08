@@ -51,17 +51,21 @@ textarea {
 }
 
 input[type='submit'],
-button {
+button,
+.button {
+  display: inline-block;
   cursor: pointer;
   background: var(--c-fg);
-  padding: 4px 8px;
+  padding: 8px 12px;
   border-radius: 4px;
   color: var(--c-bg);
   border: 1px solid var(--c-bg);
+  text-decoration: none;
 }
 
 input[type='submit']:hover,
-button:hover {
+button:hover,
+.button:hover {
   border: 1px solid var(--c-fg);
 }
 
@@ -72,7 +76,6 @@ input[type]:not([type='submit']) {
 
 form label {
   display: block;
-  margin-bottom: 12px;
 }
 
 p {
@@ -96,6 +99,10 @@ details {
   padding: 16px;
   border-radius: 2px;
   background: var(--c-bg-alt);
+}
+
+#docs details[open] summary {
+  font-weight: bold;
 }
 
 details pre {
@@ -226,4 +233,49 @@ code {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+fieldset > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+fieldset > div > label {
+  width: 100px;
+}
+
+fieldset > div > label + input + span {
+  margin-left: 8px;
+}
+
+hr {
+  border-top: 0;
+  border-color: var(--c-border);
+}
+
+ul,
+ol {
+  margin-top: 0;
+  padding: 16px;
+}
+
+li {
+  margin: 16px 0;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
