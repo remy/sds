@@ -1,41 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<h1>Create new app</h1>
+<form action="/app" method="post">
+  <fieldset>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" placeholder="memorable name">
+    </div>
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Data Service</title>
-    <link rel="stylesheet" href="/style.css">
-  </head>
-
-  <body>
-    <h1>Create new app</h1>
-
-    <main id="app">
-      <form action="/app" method="post">
-        <fieldset>
-          <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="memorable name">
-          </div>
-
-          <div>
-            <label for="name">Webhook:</label>
-            <input type="url" name="hook" id="hook">
-            <span>(optional)</span>
-          </div>
-        </fieldset>
-        <div>
-          <input type="submit" value="Create">
-        </div>
-      </form>
-    </main>
-    <footer>
-      <p>Built by <a href="https://remysharp.com">Remy Sharp</a>
-      <p><a href="/docs">Documentation</a></p>
-    </footer>
-
-  </body>
-
-</html>
+    <div>
+      <label for="hook">Webhook:</label>
+      <input type="url" name="hook" id="hook" placeholder="(optional)">
+    </div>
+  </fieldset>
+  <div>
+    <input class="btn" type="submit" value="Create">
+  </div>
+</form>

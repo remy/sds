@@ -41,6 +41,7 @@ router.get('/:id', async (req, res) => {
 
   if (app.submissions) {
     app.submissions.forEach((_) => (_.data = Array.from(_.data)));
+    app.submissions.reverse();
   }
 
   res.json({

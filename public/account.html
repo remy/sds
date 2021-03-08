@@ -1,47 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="fade-in" v-if="!loaded">Loading…</div>
+<div v-cloak v-if="loaded">
+  <h1>Apps</h1>
+  <div>
+    <h2>{{ apps.length }} of {{ user.appLimit }} apps</h2>
+    <ol>
+      <li v-for="app in apps"><a :href="`/app/${app.id}`">{{ app.name }}</a></li>
+    </ol>
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Data Service</title>
-    <link rel="stylesheet" href="/style.css">
-  </head>
+    <p v-if="apps.length === 0">
+      Start by creating an app to send and receive data.</p>
+    </p>
+    <p v-if="apps.length < user.appLimit">
+      <a class="button" href="/app/new" v-show="apps.length < user.appLimit">Create new app</a>
+    </p>
 
-  <body>
-    <h1>Manage Apps</h1>
+    <p v-else>
+      <em>You've reached your app limit. If you really do need more, <a
+          href="mailto:remy@remysharp.com?subject=nextapp limit">please get in touch with details
+          as
+          to what you plan.</a>.</em>
+    </p>
 
-    <main id="app">
-      <div class="fade-in" v-if="!loaded">Loading…</div>
-      <div v-cloak v-if="loaded">
-        <div>
-          <p>Account: {{ user.email }}</p>
-          <p><a href="/change-password">change password</a></p>
-        </div>
-        <hr>
-        <div>
-          <h2>{{ apps.length }} of {{ user.appLimit }} apps</h2>
-          <ol>
-            <li v-for="app in apps"><a :href="`/app/${app.id}`">{{ app.name }}</a></li>
-          </ol>
-          <div v-if="apps.length === 0">
-            <p>Start by creating an app to send and receive data.</p>
-          </div>
-          <div>
-            <a class="button" href="/app/new" v-show="apps.length < user.appLimit">Create new app</a>
-          </div>
-        </div>
-      </div>
-    </main>
-    <footer>
-      <p>Built by <a href="https://remysharp.com">Remy Sharp</a>
-      <p><a href="/docs">Documentation</a></p>
-    </footer>
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="/account.js"></script>
-  </body>
-
-</html>
+  </div>
+  <hr>
+  <div>
+    <p>Account: {{ user.email }}</p>
+    <p><a href="/change-password">change password</a></p>
+  </div>
+</div>
+<script src="/account.js"></script>

@@ -1,17 +1,26 @@
 require('renvy'); // env values
 const express = require('express');
-// const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('./lib/passport');
 const { sequelize } = require('./db');
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 app.disable('x-powered-by');
 app.set('etag', false);
 
+app.set('views', 'public');
+app.set('view engine', 'html');
+app.set('layout', __dirname + '/public/layout.html');
+app.set('layout extractScripts', true);
+app.engine('html', ejs.renderFile);
+
+app.locals.HOST = process.env.HOST;
 // middleware
+app.use(expressLayouts);
 app.use(
   bodyParser.urlencoded({
     extended: true,

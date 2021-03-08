@@ -28,11 +28,11 @@ router.param('id', async (req, res, next, id) => {
 });
 
 router.get('/new', (req, res) => {
-  res.sendFile('/public/app/new.html', { root: __dirname + '/../' });
+  res.render('app/new', { user: req.user });
 });
 
 router.get('/:id', (req, res) => {
-  res.sendFile('/public/app/index.html', { root: __dirname + '/../' });
+  res.render('app/index', { user: req.user });
 });
 
 // create
@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
       hook,
     });
     await req.user.addApp(app);
-    res.status(201).json({ success: true });
+    res.status(201).redirect(`/app/${app.id}`);
   } catch (e) {
     res.status(400).json({ error: 'failed', source: e.message });
   }

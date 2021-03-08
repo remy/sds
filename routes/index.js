@@ -4,6 +4,8 @@ const router = express.Router();
 module.exports = router;
 
 router.use('/', require('./account'));
+router.get('/docs', (req, res) => res.render('docs', { user: req.user }));
+router.get('/login', (req, res) => res.render('login', { user: req.user }));
 
 router.post(
   '/login',
