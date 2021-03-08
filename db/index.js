@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: process.env.DB_FILE || 'next.db',
-  logging: true,
+  logging: false,
 });
 
 const TEXT = 0;
@@ -88,17 +88,10 @@ User.prototype.validPassword = function (pw) {
 sequelize
   .sync({ force: false })
   .then(async () => {
-    try {
-      const user = await User.create({
-        email: 'remy@remysharp.com',
-        password: 'remy99',
-      });
-
-      const app = await App.create({ name: 'marbles' });
-      user.addApp(app);
-    } catch (e) {
-      // nop
-    }
+    // try {
+    // } catch (e) {
+    //   // nop
+    // }
 
     const users = await User.findAll();
     console.log('users: ' + users.length);
