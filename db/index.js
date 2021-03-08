@@ -96,7 +96,9 @@ sequelize
 
       const app = await App.create({ name: 'marbles' });
       user.addApp(app);
-    } catch (e) {}
+    } catch (e) {
+      // nop
+    }
 
     const users = await User.findAll();
     console.log('users: ' + users.length);
