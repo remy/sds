@@ -40,6 +40,9 @@
                 <li><a href="/login">Login</a></li>
                 <% } %>
                   <li><a href="/docs">Docs</a></li>
+                  <% if (user) { %>
+                    <li><a href="/logout">Logout</a></li>
+                    <% } %>
           </ul>
         </nav>
       </header>

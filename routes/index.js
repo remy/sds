@@ -28,3 +28,22 @@ const requireUser = (req, res, next) => {
 
 router.use('/app', requireUser, require('./app'));
 router.use('/api', requireUser, require('./api'));
+
+router.get('/change-password', (req, res) => {
+  res.render('change-password', { user: req.user });
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+router.post('/change-password', (req, res) => {
+  const { oldP, newP } = req.body;
+  if (req.user.validPassword(oldP)) {
+    req.user.password = req.user.hashPassword(newP);
+    req.user.save();
+    return res.redirect('/?success');
+  }
+  return res.redirect('/change-password?failed');
+});

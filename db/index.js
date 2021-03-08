@@ -85,6 +85,10 @@ User.prototype.validPassword = function (pw) {
   return bcrypt.compareSync(pw, this.password);
 };
 
+User.prototype.hashPassword = function (pw) {
+  return bcrypt.hashSync(pw, bcrypt.genSaltSync(10), null);
+};
+
 sequelize
   .sync({ force: false })
   .then(async () => {

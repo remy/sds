@@ -716,7 +716,9 @@ fieldset > div {
 }
 
 fieldset > div > label {
-  width: 100px;
+  min-width: 100px;
+  white-space: nowrap;
+  margin-right: 16px;
 }
 
 fieldset > div > label + input + span {
