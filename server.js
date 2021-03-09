@@ -18,7 +18,7 @@ app.set('layout', __dirname + '/public/layout.html');
 app.set('layout extractScripts', true);
 app.engine('html', ejs.renderFile);
 
-app.locals.HOST = process.env.HOST;
+app.locals.HOST = process.env.HOST || 'http://localhost:8000';
 // middleware
 app.use(expressLayouts);
 app.use(
@@ -50,4 +50,4 @@ app.use('/', require('./routes')); // mount the router
 app.use(require('./routes/error'));
 app.use(express.static(__dirname + '/public/', { extensions: ['html'] }));
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 8000);

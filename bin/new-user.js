@@ -1,6 +1,7 @@
+require('renvy');
 const { User } = require('../db');
 
 User.create({
-  email: 'remy@remysharp.com',
-  password: 'remy99',
+  email: 'sam@example.com',
+  password: 'example99',
 });
