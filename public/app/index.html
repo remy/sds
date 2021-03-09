@@ -1,7 +1,11 @@
 <h1 v-if="!loaded" class="fade-in">Loading…</h1>
 <div v-if="app" v-cloak>
-  <h1 v-if="loaded">{{ app.name }} (id: {{ app.id }})</h1>
+  <h1 v-if="loaded">{{ app.name }}</h1>
   <header>
+    <div>
+      <span class="label">Id:</span>
+      <span>{{app.id}}</span>
+    </div>
     <div>
       <span class="label">Endpoint:</span>
       <code><%- HOST %>/{{app.id}}</code>
