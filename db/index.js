@@ -38,6 +38,14 @@ const App = sequelize.define('App', {
   submissions: {
     type: Submission,
   },
+  gets: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  posts: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 });
 
 App.hasMany(Submission);

@@ -21,7 +21,10 @@ router.use(async (req, res, next) => {
 });
 
 router.get('/', async (req, res) => {
-  res.send(res.locals.app.data);
+  const app = res.locals.app;
+  app.posts++;
+  app.save();
+  res.send(app.data);
 });
 
 router.post('/', async (req, res) => {
@@ -32,6 +35,9 @@ router.post('/', async (req, res) => {
   });
   const app = res.locals.app;
   await app.addSubmission(S);
+
+  app.posts++;
+  await app.save();
 
   if (app.hook) {
     axios

@@ -10,6 +10,10 @@
       <span class="label">Endpoint:</span>
       <code><%- HOST %>/{{app.id}}</code>
     </div>
+    <div>
+      <span class="label">POSTs vs GETs:</span>
+      <span>{{app.posts}} / {{app.gets}}</span>
+    </div>
     <div class="view-as">
       <span class="label">Display data as:</span>
       <label><input v-model.number="viewAs" type="radio" value="0" name="view-as"> text</label>

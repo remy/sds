@@ -35,7 +35,7 @@ app.use(
   session({
     secret: process.env.SECRET || 'nextcats',
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     name: 'session',
     store: new SequelizeStore({
       db: sequelize,
