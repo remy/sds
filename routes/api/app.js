@@ -40,7 +40,7 @@ router.get('/:id', async (req, res) => {
   app.submissions = await res.locals.app.getSubmissions();
 
   if (app.submissions) {
-    app.submissions.forEach((_) => (_.data = Array.from(_.data)));
+    app.submissions.forEach((_) => (_.data = Array.from(_.data || [])));
     app.submissions.reverse();
   }
 

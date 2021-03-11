@@ -30,6 +30,7 @@ app.use(
     },
   })
 );
+
 app.use(
   session({
     secret: process.env.SECRET || 'nextcats',

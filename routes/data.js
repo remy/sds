@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(`POST /${res.locals.app.id}`, res.locals.raw);
   const data = res.locals.raw;
   const S = await Submission.create({
     data,
