@@ -22,7 +22,7 @@ router.use(async (req, res, next) => {
 
 router.get('/', async (req, res) => {
   const app = res.locals.app;
-  app.posts++;
+  app.gets++;
   app.save();
   res.send(app.data);
 });
