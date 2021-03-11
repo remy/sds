@@ -59,7 +59,7 @@
         </span>
       </summary>
       <pre class="hex"><code>{{ s.data | asBytes(viewAs) }}</code></pre>
-      <button class="btn" v-on:click="download(s)">Download</button>
+      <button class="btn" v-on:click="download(s.data)">Download</button>
       <button class="btn" v-on:click="remove(s.id)">Delete</button>
     </details>
     <hr>
