@@ -31,7 +31,7 @@
       <button class="btn file">
         <input v-on:change="upload" type="file">
         Upload new</button>
-      <button class="btn" v-on:click="download(app.data)">Download</button>
+      <button class="btn" v-on:click="download(app)">Download</button>
     </div>
   </div>
   <div>
@@ -40,7 +40,7 @@
       <summary>
         <span>{{ s.createdAt | format }} - {{ s.data.length }} bytes</span>
         <span class="controls">
-          <button class="btn icon" title="Download" v-on:click="download(s.data)">
+          <button class="btn icon" title="Download" v-on:click="download(s, (s.key || `app-${app.id}`) + '-')">
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px">
               <path d="M0 0h24v24H0V0z" fill="none" />
@@ -59,7 +59,7 @@
         </span>
       </summary>
       <pre class="hex"><code>{{ s.data | asBytes(viewAs) }}</code></pre>
-      <button class="btn" v-on:click="download(s.data)">Download</button>
+      <button class="btn" v-on:click="download(s, (s.key || `app-${app.id}`) + '-')">Download</button>
       <button class="btn" v-on:click="remove(s.id)">Delete</button>
     </details>
     <hr>

@@ -94,8 +94,11 @@ new Vue({
         })
         .catch((e) => console.log(e));
     },
-    download(data) {
-      save(Uint8Array.from(data).buffer, 'data.bin');
+    download(res, prefix = '') {
+      const data = res.data;
+      let filename = res.updatedAt.replace(/[-:TZ.]/g, '');
+      if (prefix) filename = prefix + filename;
+      save(Uint8Array.from(data).buffer, filename + '.bin');
     },
     async remove(id) {
       if (!confirm('Delete this submission?')) {
