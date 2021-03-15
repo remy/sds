@@ -319,6 +319,14 @@ summary + div {
   margin-top: 20px;
 }
 
+details[open] {
+  margin-bottom: 64px;
+}
+
+details[open] h2 {
+  color: #000;
+}
+
 /* details {
   margin: 20px 0;
   border: 1px solid rgb(238, 238, 238);
