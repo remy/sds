@@ -43,6 +43,7 @@ router.post('/', async (req, res) => {
     axios
       .post(app.hook, {
         data,
+        previous: app.data,
       })
       .then(({ status, data }) => {
         if (status === 200) {
