@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const { App, Submission } = require('../db');
+const qs = require('qs');
 const router = express.Router({
   mergeParams: true,
 });
@@ -41,10 +42,13 @@ router.post('/', async (req, res) => {
 
   if (app.hook) {
     axios
-      .post(app.hook, {
-        data: Array.from(data),
-        previous: Array.from(app.data),
-      })
+      .post(
+        app.hook,
+        qs.stringify({
+          data: Array.from(data),
+          previous: Array.from(app.data),
+        })
+      )
       .then(({ status, data }) => {
         if (status === 200) {
           app.data = data;
