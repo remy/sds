@@ -45,8 +45,8 @@ router.post('/', async (req, res) => {
       .post(
         app.hook,
         qs.stringify({
-          data: Array.from(data),
-          previous: Array.from(app.data),
+          data: data.toString(),
+          previous: app.data.toString(),
         })
       )
       .then(({ status, data }) => {
