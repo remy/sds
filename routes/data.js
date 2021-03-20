@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  console.log(`POST /${res.locals.app.id}`, res.locals.raw);
+  console.log(`POST /${res.locals.app.id}`);
   const data = res.locals.raw;
   const S = await Submission.create({
     data,
@@ -42,8 +42,8 @@ router.post('/', async (req, res) => {
   if (app.hook) {
     axios
       .post(app.hook, {
-        data,
-        previous: app.data,
+        data: Array.from(data),
+        previous: Array.from(app.data),
       })
       .then(({ status, data }) => {
         if (status === 200) {
