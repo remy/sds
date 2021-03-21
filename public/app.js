@@ -111,9 +111,7 @@ new Vue({
       let input = data;
       if (decode) {
         try {
-          const str = atob(
-            Uint8Array.from(data).map((_) => String.fromCharCode(_))
-          );
+          const str = atob(data.map((_) => String.fromCharCode(_)).join(''));
           input = new Uint8Array(str.length);
           for (let i = 0; i < str.length; i++) {
             input[i] = str.charCodeAt(i);
@@ -126,7 +124,7 @@ new Vue({
       if (viewAs === HEX) {
         return hexdump(input);
       } else {
-        return input.slice(0, 256).map(safeChar) + tail;
+        return input.slice(0, 256).map(safeChar).join('') + tail;
       }
     },
   },
