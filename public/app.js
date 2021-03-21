@@ -4,6 +4,47 @@
 const HEX = 1;
 const TEXT = 0;
 
+/**
+ * @param {Array} buffer
+ * @returns {string}
+ */
+function hexdump(buffer) {
+  buffer = Uint8Array.from(buffer);
+
+  let offset = 0;
+  const length = buffer.length;
+
+  let out = '';
+  let row = '';
+  for (var i = 0; i < length; i += 16) {
+    row += offset.toString(16).padStart(8, '0') + '  ';
+    var n = Math.min(16, length - offset);
+    let string = '';
+    for (var j = 0; j < 16; ++j) {
+      if (j === 8) {
+        // group bytes into 8 bytes
+        row += ' ';
+      }
+      if (j < n) {
+        var value = buffer[offset];
+        string += safeChar(value);
+        row += value.toString(16).toLowerCase().padStart(2, '0') + ' ';
+        offset++;
+      } else {
+        row += '   ';
+        string += ' ';
+      }
+    }
+    row += ' |' + string + '|\n';
+  }
+  out += row;
+  return out.trim();
+}
+
+function safeChar(value) {
+  return value >= 0x20 && value <= 0x7e ? String.fromCharCode(value) : '.';
+}
+
 const save = (function () {
   var a = document.createElement('a');
   document.body.appendChild(a);
@@ -33,10 +74,19 @@ new Vue({
   data: {
     app: null,
     user: null,
+    decode: false,
   },
   computed: {
     loaded() {
       return !!this.app;
+    },
+    decoded: {
+      get() {
+        return this.decode;
+      },
+      set(value) {
+        this.decode = value;
+      },
     },
     viewAs: {
       get() {
@@ -52,23 +102,31 @@ new Vue({
       const [date, time] = new Date(string).toJSON().split('T');
       return date + ' ' + time.split('.').shift();
     },
-    asBytes(data, viewAs) {
+    asBytes(data, viewAs, decode) {
       let tail = '';
       if (data.length > 256) {
         tail = ` +${data.length - 256} more`;
       }
 
+      let input = data;
+      if (decode) {
+        try {
+          const str = atob(
+            Uint8Array.from(data).map((_) => String.fromCharCode(_))
+          );
+          input = new Uint8Array(str.length);
+          for (let i = 0; i < str.length; i++) {
+            input[i] = str.charCodeAt(i);
+          }
+        } catch (e) {
+          console.log(e.stack);
+        }
+      }
+
       if (viewAs === HEX) {
-        return (
-          data
-            .slice(0, 256)
-            .map((_) => _.toString(16).padStart(2, '0'))
-            .join(' ') + tail
-        );
+        return hexdump(input);
       } else {
-        return (
-          new TextDecoder().decode(Uint8Array.from(data)).slice(0, 256) + tail
-        );
+        return input.slice(0, 256).map(safeChar) + tail;
       }
     },
   },

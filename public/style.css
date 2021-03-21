@@ -362,6 +362,7 @@ summary .subject {
 
 label {
   cursor: pointer;
+  user-select: none;
 }
 
 .label {
@@ -697,11 +698,11 @@ code {
 }
 
 .hex {
-  /* font-size: 12px; */
-  width: 54ch;
+  width: 82ch;
   white-space: pre-wrap;
-  line-height: 18px;
-  letter-spacing: 1px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  padding-right: 0;
 }
 
 .btn.icon {

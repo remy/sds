@@ -18,14 +18,15 @@
       <span class="label">Display data as:</span>
       <label><input v-model.number="viewAs" type="radio" value="0" name="view-as"> text</label>
       <label><input v-model.number="viewAs" type="radio" value="1" name="view-as"> hex</label>
+      <label><input v-model.boolean="decode" type="checkbox" name="decode"> base64 decode</label>
     </div>
+    <div v-show="app.hook"><span class="label">Webhook:</span> <code>{{ app.hook }}</code></div>
   </header>
-  <p v-show="app.hook">Webhook: <code>{{ app.hook }}</code></p>
   <div class="current-payload">
     <h3>Current GET response</h3>
     <details>
       <summary>Length: {{ app.data.length }} bytes</summary>
-      <pre class="hex"><code class="no-break">{{ app.data | asBytes(viewAs) }}</code></pre>
+      <pre class="hex"><code class="no-break">{{ app.data | asBytes(viewAs, decode) }}</code></pre>
     </details>
     <div class="controls">
       <button class="btn file">
@@ -58,7 +59,7 @@
           </button>
         </span>
       </summary>
-      <pre class="hex"><code>{{ s.data | asBytes(viewAs) }}</code></pre>
+      <pre class="hex"><code>{{ s.data | asBytes(viewAs, decode) }}</code></pre>
       <button class="btn" v-on:click="download(s, (s.key || `app-${app.id}`) + '-')">Download</button>
       <button class="btn" v-on:click="remove(s.id)">Delete</button>
     </details>
