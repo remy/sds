@@ -7,6 +7,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('./lib/passport');
 const { sequelize } = require('./db');
 const expressLayouts = require('express-ejs-layouts');
+const compression = require('compression');
 
 const app = express();
 app.disable('x-powered-by');
@@ -44,6 +45,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(compression());
 
 // routes
 app.use(require('./routes/error'));

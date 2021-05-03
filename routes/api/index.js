@@ -23,7 +23,8 @@ router.get('/me', async (req, res) => {
     (await user.getApps()).map(async (_) => {
       const app = _.get();
       delete app.UserId;
-      app.data = Array.from(app.data || []);
+      delete app.data;
+      // app.data = Array.from(app.data || []);
 
       app.submissions = _.submissions
         ? await _.getSubmissions().map((_) => _.get())
