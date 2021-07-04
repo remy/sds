@@ -753,3 +753,8 @@ fieldset > div > label {
 fieldset > div > label + input + span {
   margin-left: 8px;
 }
+
+.more {
+  padding: 16px;
+  text-align: center;
+}

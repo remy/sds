@@ -41,6 +41,10 @@ function hexdump(buffer) {
   return out.trim();
 }
 
+/**
+ * @param {number} value
+ * @returns {string}
+ */
 function safeChar(value) {
   return value >= 0x20 && value <= 0x7e ? String.fromCharCode(value) : '.';
 }
@@ -75,6 +79,8 @@ new Vue({
     app: null,
     user: null,
     decode: false,
+    page: 0,
+    hasMore: false,
   },
   computed: {
     loaded() {
@@ -129,6 +135,21 @@ new Vue({
     },
   },
   methods: {
+    async loadMore() {
+      this.page++;
+      const submissions = await (
+        await fetch(
+          '/api' + location.pathname + '/submissions?page=' + this.page,
+          {
+            credentials: 'same-origin',
+          }
+        )
+      ).json();
+      this.app.submissions.push(...submissions);
+      if (submissions.length < 20) {
+        this.hasMore = false;
+      }
+    },
     async upload(event) {
       const formData = new FormData();
       formData.append('file', event.target.files[0]);
@@ -140,13 +161,23 @@ new Vue({
       this.update();
     },
     update() {
-      fetch('/api' + location.pathname, {
-        credentials: 'same-origin',
-      })
-        .then((res) => res.json())
-        .then((res) => {
+      Promise.all([
+        fetch('/api' + location.pathname, {
+          credentials: 'same-origin',
+        }).then((res) => res.json()),
+        fetch('/api' + location.pathname + '/submissions?page=' + this.page, {
+          credentials: 'same-origin',
+        }).then((res) => res.json()),
+      ])
+        .then(([res, submissions]) => {
+          // this.app.submissions = this.app.submissions.filter((_) => _.id !== id);
           this.app = res.app;
+          this.app.submissions = submissions;
           this.user = res.user;
+
+          if (submissions.length === 20) {
+            this.hasMore = true;
+          }
         })
         .catch((e) => console.log(e));
     },

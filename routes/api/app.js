@@ -37,19 +37,26 @@ router.get('/:id', async (req, res) => {
   const app = { ...res.locals.app.get() };
   app.data = Array.from(app.data || []);
 
-  app.submissions = await res.locals.app.getSubmissions();
-
-  if (app.submissions) {
-    app.submissions.forEach((_) => (_.data = Array.from(_.data || [])));
-    app.submissions.reverse();
-  }
-
   res.json({
     app,
     user: {
       viewAs: user.viewAs,
     },
   });
+});
+
+router.get('/:id/submissions', async (req, res) => {
+  let { page = 0 } = req.query;
+  page = parseInt(page, 10);
+
+  const submissions = await res.locals.app.getSubmissions({
+    limit: 20,
+    offset: 20 * page,
+    order: [['createdAt', 'DESC']],
+  });
+  submissions.forEach((_) => (_.data = Array.from(_.data || [])));
+
+  res.json(submissions);
 });
 
 router.post('/:id', async (req, res) => {
