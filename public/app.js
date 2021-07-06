@@ -182,7 +182,12 @@ new Vue({
         .catch((e) => console.log(e));
     },
     download(res, prefix = '') {
-      const data = res.data;
+      let data = res.data;
+      if (this.decoded) {
+        data = atob(data.map((_) => String.fromCharCode(_)).join(''))
+          .split('')
+          .map((_) => _.charCodeAt(0));
+      }
       let filename = res.updatedAt.replace(/[-:TZ.]/g, '');
       if (prefix) filename = prefix + filename;
       save(Uint8Array.from(data).buffer, filename + '.bin');
