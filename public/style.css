@@ -146,7 +146,7 @@ strong {
 }
 
 pre {
-  overflow: scroll;
+  overflow: auto;
   border-left: 4px solid var(--c-text-dark-bg);
   padding: 16px;
   padding-right: 32px;
@@ -718,7 +718,7 @@ code {
 }
 
 .hex {
-  width: 82ch;
+  width: 84ch;
   white-space: pre-wrap;
   line-height: 16px;
   letter-spacing: 0px;
